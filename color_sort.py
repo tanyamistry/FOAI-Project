@@ -170,16 +170,16 @@ class SortingGameEnv(gym.Env):
         color_idx = COLOR_NAMES.index(self.current_shape.color_name)
         shape_idx = SHAPES.index(self.current_shape.shape_type)
         
-        # One-hot encoding for shape's color and type
+
         color_one_hot = np.zeros(len(COLOR_NAMES))
         shape_one_hot = np.zeros(len(SHAPES))
         color_one_hot[color_idx] = 1
         shape_one_hot[shape_idx] = 1
 
-        # Exact positions of bins (normalized x-coordinates)
+
         bins_x = np.array([bin.x / SCREEN_WIDTH for bin in self.bins])
 
-        # One-hot encoding for bin colors (flattened)
+     
         bins_color_one_hot = []
         for bin in self.bins:
             bin_color_idx = COLOR_NAMES.index(bin.color_name)
@@ -188,7 +188,7 @@ class SortingGameEnv(gym.Env):
             bins_color_one_hot.extend(bin_color_vector)
         bins_color_one_hot = np.array(bins_color_one_hot)
 
-        # Flag indicating if shape is aligned with correct bin's center (within threshold)
+       # Check if shape is aligned with correct bin
         aligned_with_correct_bin = 0
         correct_bin_x = None
         for bin in self.bins:
